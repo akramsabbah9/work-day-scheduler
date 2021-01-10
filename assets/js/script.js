@@ -3,13 +3,17 @@
 // each event looks like: {timeblock: hour, event: "string" }
 var schedule = [];
 
+// vars to hold set intervals
+var now, daily;
+
 
 /* FUNCTIONS */
+// displays 
+
 // function to get schedule from localStorage
 
-// function to display current date
-
 /* EVENT LISTENERS */
+// event listener for 
 // event listener for clicking on event textboxes
 
 // event listener for clicking off event textboxes (save to localstorage)
@@ -19,9 +23,12 @@ var schedule = [];
 /* MAIN */
 // load events into schedule from localStorage
 
-// 
+// check and display date
 
-// need something to reset the schedule each day to blank form, 
+// every day, change displayed date and reset schedule
+/*
+1: calc how much time until the next day
+2: make a setInterval function that updates the 
 
 
 /* Akram Sabbah */

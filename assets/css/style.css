@@ -21,10 +21,6 @@ textarea {
     border-bottom: 10px solid black;
 }
 
-.description {
-    white-space: pre-wrap;
-}
-
 .time-block {
     text-align: center;
     border-radius: 15px;
@@ -33,7 +29,7 @@ textarea {
 .row {
     white-space: pre-wrap;
     height: 80px;
-    border-top: 1px solid white;;
+    border-top: 1px solid white;
 }
 
 .hour {
