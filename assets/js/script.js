@@ -11,7 +11,7 @@ var schedule = [{time:  9, event: ""}, {time: 10, event: ""}, {time: 11, event: 
 var updatePage = function () {
     var now = moment();
     
-    // 1) change the date display if it needs changing
+    // 1) change the date display to the current one
     $("#currentDay").text(now.format("dddd, MMMM Do"));
 
     // 2) highlight present/past/future hour slots
@@ -30,7 +30,7 @@ var updatePage = function () {
 };
 
 // When an event is changed and saved, update schedule and localStorage.
-var setSchedule = function (time, event) {
+var saveSchedule = function (time, event) {
     // the index of the target time block in schedule is at (time - 9).
     // update the event of schedule[time-9]
     schedule[time-9].event = event;
@@ -49,17 +49,25 @@ var loadSchedule = function () {
         let hourID = "#time-" + timeBlock.time;
         
         // find its textarea & update the text to schedule's corresponding event
-        $(hourID).find("textarea").text(timeBlock.event);
+        $(hourID).find("textarea").val(timeBlock.event);
     }
 };
 
 
-
 /* EVENT LISTENERS */
-// TODO: event listener for clicking on event textboxes
+// When a save button is clicked, save its corresponding event in the schedule.
+$(".saveBtn").on("click", function (event) {
+    event.preventDefault();
 
-// TODO: event listener for clicking save buttons
+    // grab the current time block
+    var timeBlock = $(this).closest(".time-block");
 
+    // find the hour and text of this time block, then save
+    var hr = timeBlock.attr("id").replace("time-", "");
+    var text = timeBlock.find("textarea").val();
+
+    saveSchedule(hr, text);
+});
 
 
 /* MAIN */
