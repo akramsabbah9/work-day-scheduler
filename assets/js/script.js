@@ -16,8 +16,8 @@ var updatePage = function () {
 
     // 2) highlight present/past/future hour slots
     var currentHour = parseInt( now.format("H") );
-    for(var i = 9; i <= 17; i++) {
-        var hourID = "#time-" + i;
+    for(let i = 9; i <= 17; i++) {
+        let hourID = "#time-" + i;
         
         // remove the highlight classes from this time block
         $(hourID).removeClass("past present future");
@@ -29,11 +29,28 @@ var updatePage = function () {
     }
 };
 
-// TODO: function to update schedule and localStorage
+// When an event is changed and saved, update schedule and localStorage.
+var setSchedule = function (time, event) {
+    // the index of the target time block in schedule is at (time - 9).
+    // update the event of schedule[time-9]
+    schedule[time-9].event = event;
+    
+    // then save schedule to localStorage
+    localStorage.setItem("schedule", JSON.stringify(schedule));
+};
 
 // Get schedule from localStorage.
 var loadSchedule = function () {
-    ;
+    schedule = JSON.parse(localStorage.getItem("schedule")) || schedule;
+
+    for (let i in schedule) {
+        // grab the timeBlock we're at
+        let timeBlock = schedule[i];
+        let hourID = "#time-" + timeBlock.time;
+        
+        // find its textarea & update the text to schedule's corresponding event
+        $(hourID).find("textarea").text(timeBlock.event);
+    }
 };
 
 
@@ -47,6 +64,7 @@ var loadSchedule = function () {
 
 /* MAIN */
 // load events into schedule from localStorage
+loadSchedule();
 
 // perform initial update on the page
 updatePage();
